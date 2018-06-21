@@ -10,7 +10,7 @@ pipelines:
   bake:
     image: docker:18.03.1-ce
     commands:
-    - docker build -t estafette/${ESTAFETTE_LABEL_APP}:${ESTAFETTE_GIT_BRANCH} .
+    - docker build -t estafette/hugo:${ESTAFETTE_GIT_BRANCH} .
 
   push-to-docker-hub:
     image: docker:18.03.1-ce
@@ -19,7 +19,7 @@ pipelines:
       DOCKER_HUB_PASSWORD: estafette.secret(ZpEKNFi_HPbvD_9g.Ugs4lPe9GgXgTKkfmSaE6A7yotFfxRilGRMV3DIEox2UmqdK)
     commands:
     - docker login --username=${DOCKER_HUB_USERNAME} --password="${DOCKER_HUB_PASSWORD}"
-    - docker push estafette/${ESTAFETTE_LABEL_APP}:${ESTAFETTE_GIT_BRANCH}
+    - docker push estafette/hugo:${ESTAFETTE_GIT_BRANCH}
     when:
       status == 'succeeded'
 
