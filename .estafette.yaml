@@ -3,6 +3,7 @@ builder:
 
 labels:
   app: docker-hugo
+  app-group: estafette-various
   team: estafette-team
   language: docker
 
