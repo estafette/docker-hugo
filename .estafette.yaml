@@ -1,0 +1,34 @@
+builder:
+  track: dev
+
+labels:
+  app: docker-hugo
+  app-group: estafette-various
+  team: estafette-team
+  language: docker
+
+pipelines:
+  bake:
+    image: docker:18.03.1-ce
+    commands:
+    - docker build -t estafette/hugo:${ESTAFETTE_GIT_BRANCH} .
+
+  push-to-docker-hub:
+    image: docker:18.03.1-ce
+    env:
+      DOCKER_HUB_USERNAME: estafette.secret(D8gy3KO6Fil7FaKs.KHLH6NCrIPtk6ObXaC_Y7i4xE2OY6QiorA==)
+      DOCKER_HUB_PASSWORD: estafette.secret(ZpEKNFi_HPbvD_9g.Ugs4lPe9GgXgTKkfmSaE6A7yotFfxRilGRMV3DIEox2UmqdK)
+    commands:
+    - docker login --username=${DOCKER_HUB_USERNAME} --password="${DOCKER_HUB_PASSWORD}"
+    - docker push estafette/hugo:${ESTAFETTE_GIT_BRANCH}
+    when:
+      status == 'succeeded'
+
+  slack-notify:
+    image: extensions/slack-build-status:dev
+    webhook: estafette.secret(49oDHA1GU2Y9uNr9.1_rY9ehRjYRsHnVoW-_CcP70z2EvWYgcb3U7BteamAQgx6iXo_Zrgcf_ESs4AgvhA_o20FPllOoX6GoZ4VvZqepcS5KaOIi032ljAPDSO8-7xveayDxl63XGqp2c)
+    name: ${ESTAFETTE_LABEL_APP}
+    channels:
+    - '#build-status'
+    when:
+      status == 'failed'
