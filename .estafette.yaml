@@ -9,12 +9,12 @@ labels:
 
 pipelines:
   bake:
-    image: docker:18.03.1-ce
+    image: docker:18.06.0-ce
     commands:
     - docker build -t estafette/hugo:${ESTAFETTE_GIT_BRANCH} .
 
   push-to-docker-hub:
-    image: docker:18.03.1-ce
+    image: docker:18.06.0-ce
     env:
       DOCKER_HUB_USERNAME: estafette.secret(D8gy3KO6Fil7FaKs.KHLH6NCrIPtk6ObXaC_Y7i4xE2OY6QiorA==)
       DOCKER_HUB_PASSWORD: estafette.secret(ZpEKNFi_HPbvD_9g.Ugs4lPe9GgXgTKkfmSaE6A7yotFfxRilGRMV3DIEox2UmqdK)
