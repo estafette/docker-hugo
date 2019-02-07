@@ -9,5 +9,5 @@ RUN apk add --update --no-cache \
     curl \
     && rm -rf /var/cache/apk/*
 
-RUN curl -fSL "https://github.com/gohugoio/hugo/releases/download/v0.54/hugo_0.54_Linux-64bit.tar.gz" -o /tmp/hugo.tar.gz \
+RUN curl -fSL "https://github.com/gohugoio/hugo/releases/download/v0.54.0/hugo_0.54.0_Linux-64bit.tar.gz" -o /tmp/hugo.tar.gz \
     && tar -xzf /tmp/hugo.tar.gz -C /usr/local/bin
