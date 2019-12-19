@@ -1,4 +1,4 @@
-FROM alpine:3.8
+FROM alpine:3.10
 
 LABEL maintainer="estafette.io" \
       description="The hugo container is used to generate the documentation at estafette.io"
