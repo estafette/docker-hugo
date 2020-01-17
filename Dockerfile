@@ -3,9 +3,10 @@ FROM alpine:3.11
 LABEL maintainer="estafette.io" \
       description="The hugo container is used to generate the documentation at estafette.io"
 
-RUN apk add --update --no-cache \
+RUN apk add --update --upgrade --no-cache \
     git \
     openssh \
+    openssl \
     curl \
     && rm -rf /var/cache/apk/*
 
